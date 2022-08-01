@@ -18,8 +18,8 @@ class VideoCamera(object):
         #self.frame = None
         #self.grabbed = None
         (self.grabbed, self.frame) = self.video.read()
-        self.jpeg = None
-        self.image = None
+        self.jpeg = self.frame
+        self.image = self.frame
         self.predictiontime = None
         self.detect = Object_Detector.ObjectDetection()
         # self.detect.setDaemon(True)
