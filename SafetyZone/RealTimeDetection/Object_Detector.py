@@ -13,11 +13,11 @@ sys.path.append("..")
 from tensorflow import ConfigProto
 from tensorflow import InteractiveSession
 
-MODEL_NAME_MASKRCNN = 'mask_rcnn_inception_v2_coco_2018_01_28'
-MODEL_NAME_FASTRCNN = 'faster_rcnn_inception_v2_coco_2018_01_28'
-MODEL_NAME_SSD = 'ssd_inception_v2_coco_2018_01_28' 
-LABEL_MAP = 'mscoco_label_map.pbtxt'
-NUM_CLASSES = 5
+# MODEL_NAME_MASKRCNN = 'mask_rcnn_inception_v2_coco_2018_01_28'
+# MODEL_NAME_FASTRCNN = 'faster_rcnn_inception_v2_coco_2018_01_28'
+# MODEL_NAME_SSD = 'ssd_inception_v2_coco_2018_01_28' 
+# LABEL_MAP = 'mscoco_label_map.pbtxt'
+# NUM_CLASSES = 5
 
 class ObjectDetection(object):
     def __init__(self):
@@ -27,7 +27,7 @@ class ObjectDetection(object):
                 self.labels.append(item)
         self.config = ConfigProto()
         self.config.gpu_options.allow_growth = True
-        self.config.gpu_options.per_process_gpu_memory_fraction = 0.7
+        self.config.gpu_options.per_process_gpu_memory_fraction = 0.4
         self.session = InteractiveSession(config=self.config)
         self.MODEL_NAME = 'SafetyZone/RealTimeDetection/data'
         self.CWD_PATH = os.getcwd()

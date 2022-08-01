@@ -5,7 +5,7 @@ from . import views
 app_name = "SafetyZone"
 urlpatterns = [
     # ex: /polls/
-    path('', views.video_feed, name='video_feed'),
+    path('<int:id>', views.video_feed, name='video_feed'),
     path('api/app/GetOriginalImage', views.org_image, name='org_image'),
     path('api/app/GetPredictedImage', views.predicted_image, name='predicted_image'),
     path('api/app/GetLogs', views.logs, name='logs'),

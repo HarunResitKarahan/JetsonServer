@@ -10,9 +10,10 @@ from . import Object_Detector
 from .detection_utils import draw_polly_and_check_isin
 
 class VideoCamera(object):
-    def __init__(self):
+    def __init__(self, cameraip="10.16.223.253"):
         # self.video = cv2.VideoCapture('rtsp://admin:Abc1234*@10.16.223.253/')
-        self.video = cv2.VideoCapture('rtsp://admin:Abc1234*@10.16.223.253/cam/realmonitor?channel=1&subtype=0.')
+        self.cameraip = cameraip
+        self.video = cv2.VideoCapture(f'rtsp://admin:Abc1234*@{self.cameraip}/cam/realmonitor?channel=1&subtype=0.')
         # self.video.set(cv2.CAP_PROP_BUFFERSIZE, 3)
         #self.video = None
         #self.frame = None
@@ -40,7 +41,7 @@ class VideoCamera(object):
             try:
                 (self.grabbed, self.frame) = self.video.read()
                 if not self.grabbed:
-                    self.video = cv2.VideoCapture('rtsp://admin:Abc1234*@10.16.223.253/cam/realmonitor?channel=1&subtype=0.')
+                    self.video = cv2.VideoCapture(f'rtsp://admin:Abc1234*@{self.cameraip}/cam/realmonitor?channel=1&subtype=0.')
 
                 # time.sleep(0.2)
                 # print(self.grabbed, self.frame)
@@ -55,7 +56,7 @@ class VideoCamera(object):
                 #     self.video = cv2.VideoCapture('rtsp://admin:Abc1234*@10.16.223.253/cam/realmonitor?channel=1&subtype=0.', cv2.CAP_FFMPEG)
                 #     continue
                 image = self.frame
-                image = cv2.resize(image, (720, 576))
+                image = cv2.resize(image, (300, 300))
                 self.fc+=1
                 TIME = time.time() - self.start_time
                 
@@ -71,9 +72,9 @@ class VideoCamera(object):
                 image_detected = draw_polly_and_check_isin(image_detected, boxes, scores, classes)
                 self.predictiontime = datetime.now()
                 image = cv2.putText(image_detected, fps_disp, (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                # cv2.imshow("Frame", image_detected)
-                # if cv2.waitKey(1) & 0xFF == ord('q'):
-                #     break
+                cv2.imshow("Frame", image_detected)
+                #if cv2.waitKey(1) & 0xFF == ord('q'):
+                #    break
                 # _, jpeg = cv2.imencode('.jpg', image)
                 # self.jpeg = jpeg.tobytes()
                 # self.image = orgimage.tobytes()
