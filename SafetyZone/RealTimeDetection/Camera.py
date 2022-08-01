@@ -71,9 +71,9 @@ class VideoCamera(object):
                 image_detected = draw_polly_and_check_isin(image_detected, boxes, scores, classes)
                 self.predictiontime = datetime.now()
                 image = cv2.putText(image_detected, fps_disp, (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                cv2.imshow("Frame", image_detected)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                # cv2.imshow("Frame", image_detected)
+                # if cv2.waitKey(1) & 0xFF == ord('q'):
+                #     break
                 # _, jpeg = cv2.imencode('.jpg', image)
                 # self.jpeg = jpeg.tobytes()
                 # self.image = orgimage.tobytes()
@@ -92,11 +92,12 @@ class VideoCamera(object):
         #self.image = image.tobytes()
             
 
-    # def gen(self):  
-    #     while True: 
-    #         try:
-    #             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + self.jp + b'\r\n\r\n')
+    def gen(self):  
+        while True: 
+            try:
+                yield (b'--frame\r\n' 
+                    b'Content-Type: image/jpeg\r\n\r\n' + self.jpeg + b'\r\n\r\n')
                     
-    #         except:
-    #             print("gen hata.")
+            except:
+                print("gen hata.")
 

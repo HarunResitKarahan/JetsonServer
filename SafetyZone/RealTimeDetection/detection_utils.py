@@ -9,14 +9,14 @@ import threading
 import cv2
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-from . import Plc
+# from . import Plc
 
-PLC = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
-PLC2 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
-PLC3 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+# PLC = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+# PLC2 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+# PLC3 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
 
-threading.Thread(target=PLC.Read_Bit, args=(90, 4, 0, 0.0275), daemon=True).start()
-threading.Thread(target=PLC2.Read_Bit, args=(90, 4, 1, 0.0275), daemon=True).start()
+# threading.Thread(target=PLC.Read_Bit, args=(90, 4, 0, 0.0275), daemon=True).start()
+# threading.Thread(target=PLC2.Read_Bit, args=(90, 4, 1, 0.0275), daemon=True).start()
 
 ROIS_PATH = os.path.join(os.getcwd(),'SafetyZone', 'RealTimeDetection', 'rois.json')
 

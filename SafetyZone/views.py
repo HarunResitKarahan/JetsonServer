@@ -10,7 +10,8 @@ SafetyZone = VideoCamera()
 
 @csrf_exempt
 def video_feed(request):
-    return HttpResponse(SafetyZone.jpeg, content_type="image/jpeg")
+    # return HttpResponse(SafetyZone.jpeg, content_type="image/jpeg")
+    return StreamingHttpResponse(SafetyZone.gen(), content_type="multipart/x-mixed-replace;boundary=frame")
 @csrf_exempt
 def org_image(request):
     #print(SafetyZone.image)
