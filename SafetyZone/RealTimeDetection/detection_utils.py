@@ -9,14 +9,14 @@ import threading
 import cv2
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-# from . import Plc
+from . import Plc
 
 # PLC = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
-# PLC2 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
-# PLC3 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+PLC2 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+PLC3 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
 
 # threading.Thread(target=PLC.Read_Bit, args=(90, 4, 0, 0.0275), daemon=True).start()
-# threading.Thread(target=PLC2.Read_Bit, args=(90, 4, 1, 0.0275), daemon=True).start()
+threading.Thread(target=PLC2.Read_Bit, args=(90, 4, 1, 0.0275), daemon=True).start()
 
 ROIS_PATH = os.path.join(os.getcwd(),'SafetyZone', 'RealTimeDetection', 'rois.json')
 
@@ -85,11 +85,11 @@ def draw_polly_and_check_isin(image, boxes, scores, classes):
                         
                     image = draw_poly(image, polly_point, draw_isIn)
      # print(isIn)
-    # if isIn != PLC2.bit_value:
-    #     if isIn!= None:
-    #         PLC3.Set_bit(DB=90, DBX=4, DB_X=1, value=isIn)
-    #     else:
-    #         pass
+    if isIn != PLC2.bit_value:
+        if isIn!= None:
+            PLC3.Set_bit(DB=90, DBX=4, DB_X=1, value=isIn)
+        else:
+            pass
     image = show_ok_nok(image, draw_isIn)
     return image
 def draw_poly(image, polygon, isIn):

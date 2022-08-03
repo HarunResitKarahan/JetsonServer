@@ -5,10 +5,10 @@ from . import views
 app_name = "SafetyZone"
 urlpatterns = [
     # ex: /polls/
-    path('<int:id>', views.video_feed, name='video_feed'),
+    path('', views.video_feed, name='video_feed'),
     path('api/app/GetOriginalImage', views.org_image, name='org_image'),
     path('api/app/GetPredictedImage', views.predicted_image, name='predicted_image'),
-    path('api/app/GetLogs', views.logs, name='logs'),
+    path('api/app/getlogs', views.logs, name='logs'),
     path('api/app/Status', views.status, name='status'),
     path('api/app/ReloadParameters', views.reload_parameters, name='reload_parameters'),
     path('api/app/SetByPass', views.set_bypass, name='set_bypass'),

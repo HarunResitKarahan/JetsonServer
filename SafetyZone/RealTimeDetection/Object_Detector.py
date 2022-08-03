@@ -31,7 +31,7 @@ class ObjectDetection(object):
         self.session = InteractiveSession(config=self.config)
         self.MODEL_NAME = 'SafetyZone/RealTimeDetection/data'
         self.CWD_PATH = os.getcwd()
-        self.PATH_TO_CKPT = os.path.join(self.CWD_PATH,self.MODEL_NAME,'Safetyzone-8380_trt.pb') # ssd_inception_v2_coco_trt spellik_trt
+        self.PATH_TO_CKPT = os.path.join(self.CWD_PATH,self.MODEL_NAME,'SafetyZone-17000_trt.pb') # ssd_inception_v2_coco_trt spellik_trt
 
         # # Load the Tensorflow model into memory.
         self.detection_graph = tf.Graph()

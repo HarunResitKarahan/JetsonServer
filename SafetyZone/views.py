@@ -7,16 +7,16 @@ import base64
 from SafetyZone.RealTimeDetection.Camera import VideoCamera
 
 SafetyZone = VideoCamera("10.16.223.253")
-SafetyZone2 = VideoCamera("10.16.222.253")
+# SafetyZone2 = VideoCamera("10.16.222.253")
 
-projects = []
-projects.append(SafetyZone)
-projects.append(SafetyZone2)
+# projects = []
+# projects.append(SafetyZone)
+# projects.append(SafetyZone2)
 
 @csrf_exempt
-def video_feed(request, id):
+def video_feed(request):
     # return HttpResponse(SafetyZone.jpeg, content_type="image/jpeg")
-    return StreamingHttpResponse(projects[id].gen(), content_type="multipart/x-mixed-replace;boundary=frame")
+    return StreamingHttpResponse(SafetyZone.gen(), content_type="multipart/x-mixed-replace;boundary=frame")
 @csrf_exempt
 def org_image(request):
     #print(SafetyZone.image)

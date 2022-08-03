@@ -56,7 +56,7 @@ class VideoCamera(object):
                 #     self.video = cv2.VideoCapture('rtsp://admin:Abc1234*@10.16.223.253/cam/realmonitor?channel=1&subtype=0.', cv2.CAP_FFMPEG)
                 #     continue
                 image = self.frame
-                image = cv2.resize(image, (300, 300))
+                image = cv2.resize(image, (720, 576))
                 self.fc+=1
                 TIME = time.time() - self.start_time
                 
@@ -72,7 +72,7 @@ class VideoCamera(object):
                 image_detected = draw_polly_and_check_isin(image_detected, boxes, scores, classes)
                 self.predictiontime = datetime.now()
                 image = cv2.putText(image_detected, fps_disp, (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                cv2.imshow("Frame", image_detected)
+                # cv2.imshow("Frame", image_detected)
                 #if cv2.waitKey(1) & 0xFF == ord('q'):
                 #    break
                 # _, jpeg = cv2.imencode('.jpg', image)
@@ -100,5 +100,5 @@ class VideoCamera(object):
                     b'Content-Type: image/jpeg\r\n\r\n' + self.jpeg + b'\r\n\r\n')
                     
             except:
-                print("gen hata.")
+                pass
 
