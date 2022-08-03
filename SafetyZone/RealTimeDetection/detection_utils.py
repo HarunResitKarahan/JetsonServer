@@ -12,11 +12,11 @@ from shapely.geometry.polygon import Polygon
 from . import Plc
 
 # PLC = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
-PLC2 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
-PLC3 = Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+#PLC2 = Plc.Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
+#PLC3 = Plc.Plc('10.15.221.254', PlcRack=0, PlcSlot=1)
 
 # threading.Thread(target=PLC.Read_Bit, args=(90, 4, 0, 0.0275), daemon=True).start()
-threading.Thread(target=PLC2.Read_Bit, args=(90, 4, 1, 0.0275), daemon=True).start()
+#threading.Thread(target=PLC2.Read_Bit, args=(90, 4, 1, 0.0275), daemon=True).start()
 
 ROIS_PATH = os.path.join(os.getcwd(),'SafetyZone', 'RealTimeDetection', 'rois.json')
 
@@ -71,7 +71,7 @@ def draw_polly_and_check_isin(image, boxes, scores, classes):
         draw_poly_(image, polly_point)
     polly_is_in = []
     for i in range(min(12, boxes.shape[0])):
-        if scores is None or scores[i] > 0.3:
+        if scores is None or scores[i] > 0.7:
             box = tuple(boxes[i].tolist())
             
             for index, polly_point in enumerate(ROIS_POLY_POINT_LIST):
@@ -85,11 +85,11 @@ def draw_polly_and_check_isin(image, boxes, scores, classes):
                         
                     image = draw_poly(image, polly_point, draw_isIn)
      # print(isIn)
-    if isIn != PLC2.bit_value:
-        if isIn!= None:
-            PLC3.Set_bit(DB=90, DBX=4, DB_X=1, value=isIn)
-        else:
-            pass
+    #if isIn != PLC2.bit_value:
+    #    if isIn!= None:
+    #        PLC3.Set_bit(DB=90, DBX=4, DB_X=1, value=isIn)
+    #    else:
+    #        pass
     image = show_ok_nok(image, draw_isIn)
     return image
 def draw_poly(image, polygon, isIn):
@@ -127,12 +127,12 @@ def draw_poly_(image, polygon):
 def check_rois(image, polygon, box, position):
     width = image.shape[0]
     height = image.shape[1]
-    x_min = box[0] * width
+    x_min = box[0] * width # [x_min, y_min, x_max, y_max]
     y_min = box[1] * height
     x_max = box[2] * width
     y_max = box[3] * height
     if position == 'BottomCenter':
-        point = (x_max-((x_max-x_min)/2), y_max)
+        point = (x_max-((x_max-x_min)/2), y_min)
     if position == 'MiddleCenter':
         point = (x_max-((x_max-x_min)/2), (y_max-(y_max-y_min)/2))
 

@@ -71,14 +71,14 @@ class ObjectDetection(object):
             [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
             feed_dict={self.image_tensor: image_expanded})
         for i in range(int(num[0])):
-            if int(scores[0][i]*100) >= 30:
+            if int(scores[0][i]*100) >= 70:
         
                 box = boxes[0][i] * np.array([image.shape[0], image.shape[1], image.shape[0], image.shape[1]])        
 
-                image = cv2.rectangle(image, (int(box[1]) , int(box[0])), (int(box[3]), int(box[2])), (255, 0, 0), 2)
+                image = cv2.rectangle(image, (int(box[1]) , int(box[0])), (int(box[3]), int(box[2])), (0, 255, 0), 2)
 
-                image = cv2.putText(image, str(self.labels[int(classes[0][i] - 1)])[:-1], (int(box[3]) - 50, int(box[2]) - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 0, 0), 2)
-                image = cv2.putText(image, "% " + str(int(scores[0][i]*100)), (int(box[1]) + 5, int(box[0]) + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 0, 0), 2) 
+                image = cv2.putText(image, str(self.labels[int(classes[0][i] - 1)])[:-1], (int(box[3]) - 50, int(box[2]) - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1)
+                image = cv2.putText(image, "% " + str(int(scores[0][i]*100)), (int(box[1]) + 5, int(box[0]) + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1) 
 
         #return image, boxes, scores, classes, num
         return image, boxes, scores, classes
